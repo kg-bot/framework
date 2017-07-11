@@ -20,6 +20,6 @@ class Database
      */
     public function index()
     {
-        var_dump($this->db->select(['*'])->from('framework')->run()->all());
+        return $this->db->select(['*'])->from('quotes')->run()->all();
     }
 }

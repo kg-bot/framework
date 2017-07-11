@@ -26,13 +26,13 @@ class DatabaseHelper
 
     public function select($what)
     {
-        $this->sql = 'SELECT ' . implode(', ', $what) . ' ';
+        $this->sql = 'SELECT ' . implode(', ', $what);
         return $this;
     }
 
     public function from($table)
     {
-        $this->sql .= $table;
+        $this->sql .= ' FROM ' . $table;
         return $this;
     }
 

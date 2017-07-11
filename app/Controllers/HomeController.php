@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\Database;
+use App\Helpers\View;
 
 class HomeController
 {
@@ -10,6 +11,8 @@ class HomeController
     {
         $db = new Database();
 
-        $db->index();
+        $quotes = $db->index();
+
+        echo View::getView('index', $quotes);
     }
 }
