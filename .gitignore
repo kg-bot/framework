@@ -1,0 +1,4 @@
+/vendor/
+.git/
+*.sublime*
+phinx.yml

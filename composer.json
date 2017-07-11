@@ -1,0 +1,22 @@
+{
+    "name": "kgbot/framework",
+    "description": "Custom Framework",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Stefan Ninic",
+            "email": "ninicstefan94@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "robmorgan/phinx": "dev-master"
+    },
+
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/",
+            "Controllers\\": "app/Controllers/"
+        }
+    }
+}
