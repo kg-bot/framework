@@ -7,7 +7,7 @@ use App\Helpers\View;
 
 class HomeController
 {
-    public function indexAction($name)
+    public function indexAction()
     {
         $db = new Database();
 

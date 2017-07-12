@@ -12,4 +12,19 @@ class View
             echo $e->getMessage();
         }
     }
+
+    public static function redirect($where = '/index.php?c=Home&m=index')
+    {
+        header('Location: ' . $where);
+    }
+
+    public static function error403($message = "Page not found")
+    {
+        try {
+            http_response_code(403);
+            require_once(__DIR__ . '/../../resources/views/errors/403.php');
+        } catch (Exception $e) {
+            echo $e->getMessage();
+        }
+    }
 }

@@ -1,21 +1,39 @@
 <?php
-require_once __DIR__ . '/../vendor/autoload.php';
+
+require __DIR__ . '/../app/Bootstrap/bootstrap.php';
 
 use App\Helpers\Input;
+use App\Helpers\View;
 
 $routes = require __DIR__ . '/../routes/web.php';
 
 try {
     $route = $routes[$_SERVER['REQUEST_METHOD']];
 
-    $controller = $route[$_GET['c']]['_controller'];
-    $action = $route[$_GET['c']][$_GET['m']];
+    if($_SERVER['REQUEST_METHOD'] === "GET") {
 
-    $arguments = Input::getArguments($_GET);
+        $controller = $route[$_GET['c']]['_controller'];
+        $action = $route[$_GET['c']][$_GET['m']];
+        $arguments = Input::getArguments($_GET);    
 
-    $instance = new $controller();
+    } elseif($_SERVER['REQUEST_METHOD'] === "POST") {
 
-    call_user_func_array(array($instance, $action), $arguments);
+        $controller = $route[$_POST['c']]['_controller'];
+        $action = $route[$_POST['c']][$_POST['m']];
+        $arguments = Input::getArguments($_POST);
+
+    } else {
+        throw new Exception("Error Processing Request", 1);
+        
+    }
+
+    if(isset($controller) && isset($action)) {
+        $instance = new $controller();
+        
+        call_user_func_array(array($instance, $action), $arguments);
+    } else {
+        echo View::error403();
+    }
 
 } catch (Exception $e) {
     echo 'Caught exception: ',  $e->getMessage(), "\n";
